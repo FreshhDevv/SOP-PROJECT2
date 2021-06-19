@@ -116,29 +116,29 @@ include_once ('connection.php');
 
         <?php
         $con = $con= mysqli_connect('localhost','root','','project_db');
-                $query="select * from expressions";
-                $result=mysqli_query($con,$query);
-            while ($row = mysqli_fetch_assoc($result))
-            {
+        $query="select * from expressions where category = 'greetings' ";
+        $result=mysqli_query($con,$query);
+        while ($row = mysqli_fetch_assoc($result)) { ?>
+            <tr>
+                <td>
+                    <?php echo $row['id'];?>
+                </td>
+                <td>
+                    <?php echo $row['expression'];?>
+                </td>
+                <td>
+                    <?php echo $row['translation'];?>
+                </td>
 
-            }
-        ?>
-        <tr>
-                                        <td>
-                                            <?php echo $row['id'];?>
-                                        </td>
-                                        <td>
-                                            <?php echo $row['expression'];?>
-                                        </td>
-                                        <td>
-                                            <?php echo $row['translation'];?>
-                                        </td>
+                <td>
+                    <audio controls>
+                        <source src="<?php echo base64_encode($row['audio']) ;?>" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </td>
 
-                                        <td>
-                                            <?php echo $row['audio'];?>
-                                        </td>
-
-        </tr>
+            </tr>
+        <?php } ?>
     </table>
 
 
